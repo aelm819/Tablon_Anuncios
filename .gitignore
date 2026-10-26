@@ -1,0 +1,16 @@
+# Credenciales y variables de entorno
+.env
+.env.local
+config.php
+
+# Dependencias
+/vendor/
+/node_modules/
+
+# Logs y temporales
+*.log
+/storage/*.key
+
+# Configuración de IDEs
+.idea/
+.vscode/

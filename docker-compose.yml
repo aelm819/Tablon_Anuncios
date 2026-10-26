@@ -1,0 +1,43 @@
+services:
+
+  web:
+    build: .
+    ports:
+      - "8080:80"
+
+    volumes:
+      - ./:/var/www/html:z
+      - ./php/custom.ini:/usr/local/etc/php/conf.d/custom.ini:ro
+      - ./config.php:/var/www/config.php:ro
+
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.4
+
+    environment:
+      MYSQL_ROOT_PASSWORD: laquesea
+      MYSQL_DATABASE: tablon_anuncios
+
+    volumes:
+      - db_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin
+
+    environment:
+      PMA_HOST: db
+
+    ports:
+      - "8081:80"
+
+    depends_on:
+
+      - db
+
+  redis:
+    image: redis:7
+
+volumes:
+  db_data:
